@@ -201,6 +201,7 @@ public class SNMPSink extends Sink {
     private SNMPManagerConfig managerConfig;
     private SNMPManager manager;
     private StreamDefinition streamDefinition;
+    private SiddhiAppContext siddhiAppContext;
 
     @Override
     public Class[] getSupportedInputEventClasses() {
@@ -215,6 +216,7 @@ public class SNMPSink extends Sink {
     @Override
     protected void init(StreamDefinition streamDefinition, OptionHolder optionHolder, ConfigReader configReader,
                         SiddhiAppContext siddhiAppContext) {
+        this.siddhiAppContext = siddhiAppContext;
         this.streamDefinition = streamDefinition;
         managerConfig = SNMPValidator.validateAndGetManagerConfig(optionHolder,
                 this.streamDefinition.getId(), false);
@@ -228,11 +230,11 @@ public class SNMPSink extends Sink {
         try {
             manager.setRequestAndValidate(data);
         } catch (IOException e) {
-            throw new SNMPSinkRuntimeException("Stream Name : " + this.streamDefinition.getId()
-                    + " : Error in IO ", e);
+            throw new SNMPSinkRuntimeException("snmp request timeout in : " + siddhiAppContext.getName() + " "
+                    + this.streamDefinition.getId(), e);
         } catch (SNMPRuntimeException ex) {
-            throw new SNMPSinkRuntimeException("Stream Name : " + this.streamDefinition.getId()
-                    + " : Error in setting on agent ", ex);
+            throw new SNMPSinkRuntimeException("Error in setting on agent in" + siddhiAppContext.getName() + " "
+                    + this.streamDefinition.getId() , ex);
         } finally {
             managerConfig.clear();
         }
@@ -243,8 +245,8 @@ public class SNMPSink extends Sink {
         try {
             manager.listen();
         } catch (IOException e) {
-            throw new ConnectionUnavailableException(this.streamDefinition.getId()
-                    + " Error in Setting up Connection : ", e);
+            throw new ConnectionUnavailableException("Error in granting a port from OS in stream " +
+                    siddhiAppContext.getName() + " " + this.streamDefinition.getId(), e);
         }
     }
 

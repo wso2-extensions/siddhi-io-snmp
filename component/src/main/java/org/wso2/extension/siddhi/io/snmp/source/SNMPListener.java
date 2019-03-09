@@ -60,12 +60,12 @@ public class SNMPListener implements Runnable {
                     lock.unlock();
                 }
             }
-
             sourceEventListener.onEvent(map, null);
         } catch (AgentNotFoundException ex) {
-            log.info("Target error in stream : " + sourceEventListener.getStreamDefinition().getId());
+            log.error("Target error in stream : " + sourceEventListener.getStreamDefinition().getId(), ex);
         } catch (IOException e) {
-            log.info("Thread was interrupted due to IO in stream " + sourceEventListener.getStreamDefinition().getId());
+            log.error("Thread was interrupted due to IO in stream "
+                    + sourceEventListener.getStreamDefinition().getId(), e);
         }
     }
 

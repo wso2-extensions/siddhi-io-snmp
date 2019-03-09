@@ -224,14 +224,15 @@ public class SNMPSource extends Source {
     private ScheduledFuture future;
     private ScheduledExecutorService scheduledExecutorService;
     private SNMPListener listener;
+    private SiddhiAppContext siddhiAppContext;
 
     @Override
     public void init(SourceEventListener sourceEventListener, OptionHolder optionHolder,
                      String[] requestedTransportPropertyNames, ConfigReader configReader,
                      SiddhiAppContext siddhiAppContext) {
         SNMPManagerConfig managerConfig = SNMPValidator.validateAndGetManagerConfig(optionHolder,
-                sourceEventListener.getStreamDefinition().getId(),
-                true);
+                sourceEventListener.getStreamDefinition().getId(), true);
+        this.siddhiAppContext = siddhiAppContext;
         this.sourceEventListener = sourceEventListener;
         this.manager = new SNMPManager(managerConfig);
         this.requestInterval = validateRequestInterval(optionHolder, sourceEventListener.getStreamDefinition().getId());
@@ -243,7 +244,7 @@ public class SNMPSource extends Source {
         try {
             return Integer.parseInt(optionHolder.validateAndGetStaticValue(SNMPConstants.REQUEST_INTERVAL,
                     SNMPConstants.DEFAULT_REQUEST_INTERVAL));
-        } catch (Exception e) {
+        } catch (NumberFormatException e) {
             throw new SiddhiAppValidationException(streamName + " Request interval accept only positive integers");
         }
     }
@@ -258,8 +259,8 @@ public class SNMPSource extends Source {
         try {
             manager.listen();
         } catch (IOException e) {
-            throw new ConnectionUnavailableException("Exception in starting the snmp for stream: "
-                    + streamDefinition.getId(), e);
+            throw new ConnectionUnavailableException("Error in granting a port from OS in stream " +
+                    siddhiAppContext.getName() + " " + this.streamDefinition.getId(), e);
         }
         listener = new SNMPListener(manager, sourceEventListener);
         future = scheduledExecutorService.scheduleAtFixedRate(listener, 0, requestInterval, TimeUnit.MILLISECONDS);
