@@ -35,20 +35,17 @@ public class SNMPListener implements Runnable {
     private boolean paused = false;
     private ReentrantLock lock = new ReentrantLock();
     private Condition condition = lock.newCondition();
-
     private Logger log = Logger.getLogger(SNMPListener.class);
     private SNMPManager manager;
     private SourceEventListener sourceEventListener;
 
     public SNMPListener(SNMPManager manager, SourceEventListener sourceEventListener) {
-
         this.manager = manager;
         this.sourceEventListener = sourceEventListener;
     }
 
     @Override
     public void run() {
-
         try {
             Map<String, String> map = manager.getRequestValidateAndReturn();
             if (paused) {
@@ -73,12 +70,10 @@ public class SNMPListener implements Runnable {
     }
 
     public void pause() {
-
         paused = true;
     }
 
     public void resume() {
-
         paused = false;
         try {
             lock.lock();

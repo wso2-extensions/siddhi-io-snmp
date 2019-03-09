@@ -52,7 +52,6 @@ public class SNMPManager {
     }
 
     private OctetString getEngineId() {
-
         OctetString engineId;
         if (managerConfig.getLocalEngineID() == null) {
             engineId = new OctetString(MPv3.createLocalEngineID()).substring(0, 9);
@@ -64,7 +63,6 @@ public class SNMPManager {
 
     // granting permission from os
     public void listen() throws IOException {
-
         TransportMapping transportMapping;
         if (managerConfig.isTCP()) {
             transportMapping = new DefaultTcpTransportMapping();
@@ -85,7 +83,6 @@ public class SNMPManager {
 
     // make get request, validate and return map object
     public Map<String, String> getRequestValidateAndReturn() throws IOException {
-
         // make request
         ResponseEvent event;
         if (managerConfig.getVersion() == SnmpConstants.version3) {
@@ -95,7 +92,6 @@ public class SNMPManager {
         }
         // validation
         if (event != null && event.getResponse() != null) {
-            //log.info(event.getResponse().toString());
             Map<String, String> map = new HashMap<>();
             for (VariableBinding vb : event.getResponse().getVariableBindings()) {
                 map.put(vb.getOid().toString(), vb.getVariable().toString());
@@ -107,7 +103,6 @@ public class SNMPManager {
 
     // get map object, make set request and validate
     public void setRequestAndValidate(Map<String, String> map) throws IOException {
-
         for (Map.Entry<String, String> entry : map.entrySet()) {
             this.managerConfig.getPdu().add(new VariableBinding(new OID(entry.getKey()),
                     new OctetString(entry.getValue())));
@@ -135,7 +130,6 @@ public class SNMPManager {
 
     // clearing variable bindings and close snmp
     public void close() {
-
         try {
             if (snmp != null) {
                 snmp.close();

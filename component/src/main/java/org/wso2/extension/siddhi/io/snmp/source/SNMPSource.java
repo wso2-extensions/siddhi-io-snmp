@@ -229,7 +229,6 @@ public class SNMPSource extends Source {
     public void init(SourceEventListener sourceEventListener, OptionHolder optionHolder,
                      String[] requestedTransportPropertyNames, ConfigReader configReader,
                      SiddhiAppContext siddhiAppContext) {
-
         SNMPManagerConfig managerConfig = SNMPValidator.validateAndGetManagerConfig(optionHolder,
                 sourceEventListener.getStreamDefinition().getId(),
                 true);
@@ -251,13 +250,11 @@ public class SNMPSource extends Source {
 
     @Override
     public Class[] getOutputEventClasses() {
-
         return new Class[]{Map.class};
     }
 
     @Override
     public void connect(ConnectionCallback connectionCallback) throws ConnectionUnavailableException {
-
         try {
             manager.listen();
         } catch (IOException e) {
@@ -270,7 +267,6 @@ public class SNMPSource extends Source {
 
     @Override
     public void disconnect() {
-
     }
 
     @Override
@@ -294,13 +290,11 @@ public class SNMPSource extends Source {
 
     @Override
     public Map<String, Object> currentState() {
-
         return null;
     }
 
     @Override
     public void restoreState(Map<String, Object> map) {
-
     }
 }
 

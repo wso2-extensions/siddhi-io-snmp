@@ -204,20 +204,17 @@ public class SNMPSink extends Sink {
 
     @Override
     public Class[] getSupportedInputEventClasses() {
-
         return new Class[]{Map.class};
     }
 
     @Override
     public String[] getSupportedDynamicOptions() {
-
         return new String[0];
     }
 
     @Override
     protected void init(StreamDefinition streamDefinition, OptionHolder optionHolder, ConfigReader configReader,
                         SiddhiAppContext siddhiAppContext) {
-
         this.streamDefinition = streamDefinition;
         managerConfig = SNMPValidator.validateAndGetManagerConfig(optionHolder,
                 this.streamDefinition.getId(), false);
@@ -227,7 +224,6 @@ public class SNMPSink extends Sink {
 
     @Override
     public void publish(Object payload, DynamicOptions dynamicOptions) {
-
         Map<String, String> data = (Map) payload;
         try {
             manager.setRequestAndValidate(data);
@@ -244,7 +240,6 @@ public class SNMPSink extends Sink {
 
     @Override
     public void connect() throws ConnectionUnavailableException {
-
         try {
             manager.listen();
         } catch (IOException e) {
@@ -255,7 +250,6 @@ public class SNMPSink extends Sink {
 
     @Override
     public void disconnect() {
-
         if (manager != null) {
             manager.close();
         }
@@ -263,18 +257,15 @@ public class SNMPSink extends Sink {
 
     @Override
     public void destroy() {
-
     }
 
     @Override
     public Map<String, Object> currentState() {
-
         return null;
     }
 
     @Override
     public void restoreState(Map<String, Object> map) {
-
     }
 }
 

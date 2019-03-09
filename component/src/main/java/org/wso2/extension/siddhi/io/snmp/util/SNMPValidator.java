@@ -52,7 +52,6 @@ public class SNMPValidator {
     private final Logger log = Logger.getLogger(SNMPValidator.class);
 
     private int validateVersion(String versionString) {
-
         versionString = versionString.toLowerCase(Locale.ENGLISH);
         switch (versionString) {
             case "v1":
@@ -68,7 +67,6 @@ public class SNMPValidator {
     }
 
     private List<VariableBinding> validateAndGetOidList(String oidListString) {
-
         oidListString = oidListString.replace(" ", "");
         if (oidListString.equals("")) {
             throw new SiddhiAppValidationException(streamName + "oid list empty!");
@@ -85,7 +83,6 @@ public class SNMPValidator {
     }
 
     private OID validateAndGetPriv(String priv) {
-
         priv = priv.toUpperCase(Locale.ENGLISH);
         switch (priv) {
             case "PRIVDES":
@@ -109,7 +106,6 @@ public class SNMPValidator {
     }
 
     private OID validateAndGetAuth(String auth) {
-
         auth = auth.toUpperCase(Locale.ENGLISH);
         switch (auth) {
             case "AUTHMD5":
@@ -130,7 +126,6 @@ public class SNMPValidator {
     }
 
     private int validateSecLvl(String seclvl) {
-
         seclvl = seclvl.toUpperCase(Locale.ENGLISH);
         switch (seclvl) {
             case "NOAUTH_NOPRIV":
@@ -146,7 +141,6 @@ public class SNMPValidator {
     }
 
     private OctetString validateEngineId(String engineId) {
-
         if (engineId.equals("Empty")) {
             return null;
         }
@@ -174,7 +168,6 @@ public class SNMPValidator {
     public static SNMPManagerConfig validateAndGetManagerConfig(OptionHolder optionHolder,
                                                 String streamName,
                                                 boolean includeOids) {
-
         SNMPValidator validator = new SNMPValidator(streamName);
         SNMPManagerConfig managerConfig = new SNMPManagerConfig();
 
@@ -220,11 +213,7 @@ public class SNMPValidator {
         } else {
             String community = optionHolder.validateAndGetStaticValue(SNMPConstants.COMMUNITY,
                     SNMPConstants.DEFAULT_COMMUNITY);
-            managerConfig.setCommunityTarget(host,
-                    port,
-                    community,
-                    retries,
-                    timeout);
+            managerConfig.setCommunityTarget(host, port, community, retries, timeout);
         }
 
         return managerConfig;

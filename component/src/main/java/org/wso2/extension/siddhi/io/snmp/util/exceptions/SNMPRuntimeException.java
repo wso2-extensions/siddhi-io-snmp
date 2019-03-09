@@ -25,17 +25,14 @@ package org.wso2.extension.siddhi.io.snmp.util.exceptions;
 public class SNMPRuntimeException extends RuntimeException {
 
     public SNMPRuntimeException() {
-
         super();
     }
 
     public SNMPRuntimeException(String messsage) {
-
         super(messsage);
     }
 
     public SNMPRuntimeException(String message, Throwable cause) {
-
         super(message, cause);
     }
 }
