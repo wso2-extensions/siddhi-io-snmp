@@ -28,7 +28,7 @@ import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
- * SNMP Listener thread
+ * SNMP Listener thread for make request
  **/
 public class SNMPListener implements Runnable {
 

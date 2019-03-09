@@ -34,6 +34,10 @@ import org.wso2.siddhi.core.stream.output.StreamCallback;
 
 import java.io.IOException;
 
+
+/**
+ * Test siddhi-io-snmp sink for snmp v3
+ */
 public class TestCaseOfSNMPSinkV3 {
 
     private static final Logger log = Logger.getLogger(TestCaseOfSNMPSinkV3.class);

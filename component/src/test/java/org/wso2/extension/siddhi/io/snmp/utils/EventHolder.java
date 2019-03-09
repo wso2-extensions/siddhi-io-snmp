@@ -27,7 +27,7 @@ import java.util.Map;
  * by list of key-value map
  *
  * */
-public class EventHolder { //TODO ->  check again  ;-)
+public class EventHolder {
     private Logger log = Logger.getLogger(EventHolder.class);
     private volatile LinkedList<Map<String, String>> eventList;
     private int listSize = 10;
@@ -39,10 +39,6 @@ public class EventHolder { //TODO ->  check again  ;-)
     public EventHolder(int size) {
         eventList = new LinkedList<>();
         this.listSize = size;
-    }
-
-    public int getEventCounts() {
-        return eventList.size();
     }
 
     public synchronized void addEvent(Map<String, String> map) {

@@ -39,7 +39,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Handle SNMP and request data
+ * Handle SNMP requests and data
  */
 public class SNMPManager {
 

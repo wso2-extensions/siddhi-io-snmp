@@ -37,6 +37,10 @@ import java.io.IOException;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
+
+/**
+ * Test siddhi-io-snmp source for snmp v1 & v2c
+ */
 public class TestCaseOfSNMPSourceV1V2 {
 
     private  Logger log = Logger.getLogger(TestCaseOfSNMPSourceV1V2.class);

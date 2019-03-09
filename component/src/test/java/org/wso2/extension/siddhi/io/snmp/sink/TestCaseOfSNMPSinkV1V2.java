@@ -34,6 +34,10 @@ import org.wso2.siddhi.core.stream.output.StreamCallback;
 
 import java.io.IOException;
 
+
+/**
+ * Test siddhi-io-snmp sink for snmp v1 & v2c
+ */
 public class TestCaseOfSNMPSinkV1V2 {
 
     String port = "2019";

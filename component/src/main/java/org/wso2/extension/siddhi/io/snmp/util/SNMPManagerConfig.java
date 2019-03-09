@@ -33,7 +33,7 @@ import org.snmp4j.smi.VariableBinding;
 import java.util.List;
 
 /**
- * this class is used to keep data for manager
+ * This class is used to keep data for manager
  */
 public class SNMPManagerConfig {
 

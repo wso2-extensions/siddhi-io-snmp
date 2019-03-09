@@ -40,7 +40,7 @@ import java.io.IOException;
 import java.util.Map;
 
 /**
- * This is a sample class-level comment, explaining what the extension class does.
+ * Handle the SNMP set request task.
  */
 
 @Extension(

@@ -42,7 +42,7 @@ import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
 /**
- * SNMP Source implementation
+ * Handle the SNMP get request task.
  */
 @Extension(
         name = "snmp",
