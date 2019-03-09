@@ -121,7 +121,6 @@ public class SNMPValidator {
             default:
                 throw new SiddhiAppValidationException(streamName + " AUTH not acceptable! " +
                         "Only acceptable for NO_AUTH(default), AUTHMD5, AUTHSHA, AUTHHMAC192SHA256, AUTHHMAC192SHA512");
-
         }
     }
 
