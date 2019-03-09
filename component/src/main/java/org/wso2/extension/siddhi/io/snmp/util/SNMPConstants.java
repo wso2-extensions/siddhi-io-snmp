@@ -68,6 +68,8 @@ public class SNMPConstants {
     public static final String DEFAULT_REQUEST_INTERVAL = "5000";
     public static final String DEFAULT_TRANSPORT_PROTOCOL = "udp";
 
+    public static final int NO_ERROR_INDEX = 0;
+
     private SNMPConstants() {
 
     }

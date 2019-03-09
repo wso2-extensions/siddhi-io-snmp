@@ -123,7 +123,7 @@ public class SNMPManager {
             throw new SNMPRuntimeException(" No such target / Invalid authentication / Timeout error ",
                     new Throwable("event response is null"));
         }
-        if (event.getResponse().getErrorIndex() != 0) { // Error = 0 is no error
+        if (event.getResponse().getErrorIndex() != SNMPConstants.NO_ERROR_INDEX) {
             throw new SNMPRuntimeException(" Error " + event.getResponse().getErrorStatusText());
         }
     }
