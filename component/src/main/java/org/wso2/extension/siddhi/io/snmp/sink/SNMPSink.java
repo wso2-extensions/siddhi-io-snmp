@@ -46,7 +46,8 @@ import java.util.Map;
 @Extension(
         name = "snmp",
         namespace = "sink",
-        description = " SNMP Sink allows user to make set requests as a manager and make changes on agent.",
+        description = " SNMP Sink allows user to make set requests as a manager and make changes on agent. " +
+                "It communicate through SNMP and transport layer is optional as TCP and UDP",
         parameters = {
                 @Parameter(name = SNMPConstants.HOST,
                         description = "Host name or ip of the target which is SNMP agent.",
@@ -146,17 +147,18 @@ import java.util.Map;
         },
         examples = {
                 @Example(
-                        description = "This example shows how to make set request using snmp " +
-                                "version v1 ",
+                        description = "This example shows how to make set request using snmp version v1 " +
+                                "It uses keyvalue mapping and chooses transport protocol as UDP. After sending the " +
+                                "message it can configure target agent in localhost sysLocation (related to oid)",
 
                         syntax = "@Sink(type='snmp',\n" +
-                                "@map(type='keyvalue', @payload('1.3.6.1.2.1.1.1.0' = 'sysDscr')),\n" +
+                                "@map(type='keyvalue', @payload('1.3.6.1.2.1.1.6.0' = 'sysLocation')),\n" +
                                 "host = '127.0.0.1',\n" +
                                 "version = 'v1',\n" +
                                 "community = 'public',\n" +
                                 "agent.port = '161',\n" +
                                 "retries = '5')\n" +
-                                "define stream outputStream(sysDscr string);\n"
+                                "define stream outputStream(sysLocation string);\n"
                 ),
                 @Example(
                         description = "This example shows how to make set request using snmp " +
@@ -172,8 +174,8 @@ import java.util.Map;
                                 "define stream outputStream(sysLocation string);\n"
                 ),
                 @Example(
-                        description = "This example shows how to make set request using snmp " +
-                                "version v3 ",
+                        description = "This example shows how to make set request using snmp version v3. " +
+                                "And here we can configure security protocols related to target agent as well.",
 
                         syntax = "@Sink(type='snmp',\n" +
                                 "@map(type='keyvalue', " +

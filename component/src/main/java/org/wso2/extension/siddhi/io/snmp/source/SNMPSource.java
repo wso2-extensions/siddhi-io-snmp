@@ -47,7 +47,8 @@ import java.util.concurrent.TimeUnit;
 @Extension(
         name = "snmp",
         namespace = "source",
-        description = " SNMP Source allows user to make get request as manager and get agent status in periodically",
+        description = " SNMP Source allows user to make get request as manager and get agent status in periodically. " +
+                "It communicate through SNMP and transport layer is optional as TCP and UDP",
         parameters = {
                 @Parameter(name = SNMPConstants.HOST,
                         description = "Address or ip of the target SNMP agent.",
@@ -156,7 +157,10 @@ import java.util.concurrent.TimeUnit;
         },
         examples = {
                 @Example(
-                        description = "This example shows how to make get request for snmp version 1 ",
+                        description = "This example shows how to make get request for snmp version 1. " +
+                                "It uses keyvalue mapping and chooses transport protocol as UDP default." +
+                                "After staring the siddhi app it can get information of target  periodically, " +
+                                "here agent sysLocation and sysUpTime (related to oid) ",
 
                         syntax = "@source(type='snmp', \n" +
                                 "@map(type='keyvalue', " +
@@ -190,7 +194,8 @@ import java.util.concurrent.TimeUnit;
                                 " define stream inputStream(sysUpTime string, sysLocation string);\n"
                 ),
                 @Example(
-                        description = "This example shows how to make get request for snmp version 3 ",
+                        description = "This example shows how to make get request for snmp version 3 " +
+                                "And here we can configure security protocols related to target agent as well.",
 
                         syntax = "@source(type ='snmp', \n" +
                                 "@map(type='keyvalue', " +

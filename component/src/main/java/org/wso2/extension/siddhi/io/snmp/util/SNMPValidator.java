@@ -69,13 +69,14 @@ public class SNMPValidator {
     private List<VariableBinding> validateAndGetOidList(String oidListString) {
         oidListString = oidListString.replace(" ", "");
         if (oidListString.equals("")) {
-            throw new SiddhiAppValidationException(streamName + "oid list empty!");
+            throw new SiddhiAppValidationException(streamName + " oid list empty!");
         }
         List<VariableBinding> list = new LinkedList<>();
         String[] oids = oidListString.split(",");
         for (String oid : oids) {
             if (!Pattern.matches("^\\d+(\\.\\d+)*$", oid)) {
-                throw new SiddhiAppValidationException("OID pattern error");
+                throw new SiddhiAppValidationException(streamName + " OID pattern error. " +
+                        "ex :- '1.3.6.1.2.1.1.1.0, 1.3.6.1.2.1.1.2.0'");
             }
             list.add(new VariableBinding(new OID(oid)));
         }

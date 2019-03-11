@@ -4,7 +4,7 @@
 
 ### snmp *<a target="_blank" href="https://wso2.github.io/siddhi/documentation/siddhi-4.0/#sink">(Sink)</a>*
 
-<p style="word-wrap: break-word"> SNMP Sink allows user to make set requests as a manager and make changes on agent.</p>
+<p style="word-wrap: break-word"> SNMP Sink allows user to make set requests as a manager and make changes on agent. It communicate through SNMP and transport layer is optional as TCP and UDP</p>
 
 <span id="syntax" class="md-typeset" style="display: block; font-weight: bold;">Syntax</span>
 ```
@@ -147,16 +147,16 @@
 <span id="example-1" class="md-typeset" style="display: block; color: rgba(0, 0, 0, 0.54); font-size: 12.8px; font-weight: bold;">EXAMPLE 1</span>
 ```
 @Sink(type='snmp',
-@map(type='keyvalue', @payload('1.3.6.1.2.1.1.1.0' = 'sysDscr')),
+@map(type='keyvalue', @payload('1.3.6.1.2.1.1.6.0' = 'sysLocation')),
 host = '127.0.0.1',
 version = 'v1',
 community = 'public',
 agent.port = '161',
 retries = '5')
-define stream outputStream(sysDscr string);
+define stream outputStream(sysLocation string);
 
 ```
-<p style="word-wrap: break-word">This example shows how to make set request using snmp version v1 </p>
+<p style="word-wrap: break-word">This example shows how to make set request using snmp version v1 It uses keyvalue mapping and chooses transport protocol as UDP. After sending the message it can configure target agent in localhost sysLocation (related to oid)</p>
 
 <span id="example-2" class="md-typeset" style="display: block; color: rgba(0, 0, 0, 0.54); font-size: 12.8px; font-weight: bold;">EXAMPLE 2</span>
 ```
@@ -189,13 +189,13 @@ retries = '5')
 define stream outputStream(sysLocation string, sysDscr string);
 
 ```
-<p style="word-wrap: break-word">This example shows how to make set request using snmp version v3 </p>
+<p style="word-wrap: break-word">This example shows how to make set request using snmp version v3. And here we can configure security protocols related to target agent as well.</p>
 
 ## Source
 
 ### snmp *<a target="_blank" href="https://wso2.github.io/siddhi/documentation/siddhi-4.0/#source">(Source)</a>*
 
-<p style="word-wrap: break-word"> SNMP Source allows user to make get request as manager and get agent status in periodically</p>
+<p style="word-wrap: break-word"> SNMP Source allows user to make get request as manager and get agent status in periodically. It communicate through SNMP and transport layer is optional as TCP and UDP</p>
 
 <span id="syntax" class="md-typeset" style="display: block; font-weight: bold;">Syntax</span>
 ```
@@ -364,7 +364,7 @@ community = 'public')
  define stream inputStream(sysUpTime string, sysLocation string);
 
 ```
-<p style="word-wrap: break-word">This example shows how to make get request for snmp version 1 </p>
+<p style="word-wrap: break-word">This example shows how to make get request for snmp version 1. It uses keyvalue mapping and chooses transport protocol as UDP default.After staring the siddhi app it can get information of target  periodically, here agent sysLocation and sysUpTime (related to oid) </p>
 
 <span id="example-2" class="md-typeset" style="display: block; color: rgba(0, 0, 0, 0.54); font-size: 12.8px; font-weight: bold;">EXAMPLE 2</span>
 ```
@@ -399,5 +399,5 @@ user.name = 'agent5')
 define stream inputStream(sysUpTime string, sysDescr string);
 
 ```
-<p style="word-wrap: break-word">This example shows how to make get request for snmp version 3 </p>
+<p style="word-wrap: break-word">This example shows how to make get request for snmp version 3 And here we can configure security protocols related to target agent as well.</p>
 
