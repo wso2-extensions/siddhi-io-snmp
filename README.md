@@ -17,7 +17,7 @@
 
 ```
      <dependency>
-        <groupId>org.wso2.extension.siddhi.io.</groupId>
+        <groupId>org.wso2.extension.siddhi.io.snmp</groupId>
         <artifactId>siddhi-io-snmp</artifactId>
         <version>x.x.x</version>
      </dependency>
