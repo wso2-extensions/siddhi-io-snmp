@@ -33,6 +33,15 @@ under the License. <version>1.0.17</version>
   <artifactId>siddhi-io-snmp-parent</artifactId>
   <version>1.0.0-SNAPSHOT</version>
   <name>Siddhi I/O snmp</name>
+
+  <scm>
+    <connection>scm:git:https://github.com/wso2-extensions/siddhi-io-snmp.git</connection>
+    <url>https://github.com/wso2-extensions/siddhi-io-snmp.git</url>
+    <developerConnection>scm:git:https://github.com/wso2-extensions/siddhi-io-snmp.git
+    </developerConnection>
+    <tag>HEAD</tag>
+  </scm>
+
   <dependencyManagement>
     <dependencies>
       <dependency>

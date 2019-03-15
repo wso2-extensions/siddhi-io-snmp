@@ -28,6 +28,7 @@ under the License. <version>1.0.17</version>
     <artifactId>siddhi-io-snmp</artifactId>
     <packaging>bundle</packaging>
     <name>Siddhi io snmp extension</name>
+
     <dependencies>
         <dependency>
             <groupId>org.wso2.siddhi</groupId>
