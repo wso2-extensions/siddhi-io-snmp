@@ -191,7 +191,7 @@ import java.util.concurrent.TimeUnit;
                                 " define stream inputStream(sysUpTime string, sysLocation string);\n",
                         description = "This query shows how to make a get request for SNMP version 1. " +
                                 "It uses key-value mapping. The transport protocol is UDP by default." +
-                                "After starting the Siddhi application, it can get information of the target " +
+                                "Once the Siddhi application is started, it can get information of the target " +
                                 "periodically. The @map annotation specifies that '1.3.6.1.2.1.1.3.0' is the system" +
                                 " up time, and '1.3.6.1.2.1.1.6.0' is the system location. The same values are " +
                                 "defined as OIDs. Therefore, when a message is received with those values, the " +

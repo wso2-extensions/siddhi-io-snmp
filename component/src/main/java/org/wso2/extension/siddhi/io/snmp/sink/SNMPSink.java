@@ -170,7 +170,7 @@ import java.util.Map;
                                 "retries = '5')\n" +
                                 "define stream outputStream(sysLocation string);\n",
                         description = "This example shows how to make set request using SNMP version v1 " +
-                                "It uses keyvalue mapping and the default transport protocol is UDP. The @map " +
+                                "It uses key-value mapping and the default transport protocol is UDP. The @map " +
                                 "annotation specifies that '1.3.6.1.2.1.1.6.0' represents the system location. " +
                                 "Therefore, when you send the message, the system location of your localhost's " +
                                 "SNMP agent is sent in the encoded form. The recipient of the massage can derive " +
