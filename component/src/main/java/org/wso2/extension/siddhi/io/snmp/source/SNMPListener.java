@@ -17,10 +17,10 @@
  */
 package org.wso2.extension.siddhi.io.snmp.source;
 
+import io.siddhi.core.stream.input.source.SourceEventListener;
 import org.apache.log4j.Logger;
 import org.wso2.extension.siddhi.io.snmp.util.SNMPManager;
 import org.wso2.extension.siddhi.io.snmp.util.exceptions.AgentNotFoundException;
-import org.wso2.siddhi.core.stream.input.source.SourceEventListener;
 
 import java.io.IOException;
 import java.util.Map;

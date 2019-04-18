@@ -17,6 +17,15 @@
  */
 package org.wso2.extension.siddhi.io.snmp.source;
 
+import io.siddhi.core.SiddhiAppRuntime;
+import io.siddhi.core.SiddhiManager;
+import io.siddhi.core.event.Event;
+import io.siddhi.core.exception.SiddhiAppCreationException;
+import io.siddhi.core.stream.input.source.Source;
+import io.siddhi.core.stream.output.StreamCallback;
+import io.siddhi.core.util.EventPrinter;
+import io.siddhi.core.util.SiddhiTestHelper;
+import io.siddhi.query.api.exception.SiddhiAppValidationException;
 import org.apache.log4j.Logger;
 import org.snmp4j.mp.MPv3;
 import org.snmp4j.smi.OctetString;
@@ -28,15 +37,6 @@ import org.testng.annotations.Test;
 import org.wso2.extension.siddhi.io.snmp.utils.AdvancedCommandProcessor;
 import org.wso2.extension.siddhi.io.snmp.utils.Agent;
 import org.wso2.extension.siddhi.io.snmp.utils.EventHolder;
-import org.wso2.siddhi.core.SiddhiAppRuntime;
-import org.wso2.siddhi.core.SiddhiManager;
-import org.wso2.siddhi.core.event.Event;
-import org.wso2.siddhi.core.exception.SiddhiAppCreationException;
-import org.wso2.siddhi.core.stream.input.source.Source;
-import org.wso2.siddhi.core.stream.output.StreamCallback;
-import org.wso2.siddhi.core.util.EventPrinter;
-import org.wso2.siddhi.core.util.SiddhiTestHelper;
-import org.wso2.siddhi.query.api.exception.SiddhiAppValidationException;
 
 import java.io.IOException;
 import java.util.Collection;
