@@ -50,125 +50,139 @@ import java.util.concurrent.TimeUnit;
 @Extension(
         name = "snmp",
         namespace = "source",
-        description = " SNMP Source allows user to make get request as manager and get agent status in periodically. " +
-                "It communicate through SNMP and transport layer is optional as TCP and UDP",
+        description = "The SNMP source allows you to make GET request as manager in order to retrieve the agent " +
+                "status periodically. ",
         parameters = {
                 @Parameter(name = SNMPConstants.HOST,
-                        description = "Address or ip of the target SNMP agent.",
+                        description = "The address or the IP of the target SNMP agent.",
                         type = DataType.STRING),
                 @Parameter(name = SNMPConstants.VERSION,
-                        description = "Version of the snmp protocol. Acceptance parameters 'V1' - version1, " +
-                                "'V2C' - versionv2c, 'V3' - versionv3. ",
+                        description = "The version of the SNMP protocol. Possible values are 'V1' for version1, " +
+                                "'V2C' for versionv2c, and 'V3' for versionv3.",
                         type = DataType.STRING),
                 @Parameter(name = SNMPConstants.OIDS,
-                        description = "list of the OIDs separated by comma. " +
-                                "ex :- '1.3.6.1.2.1.1.1.0, 1.3.6.1.2.1.1.6.0' ",
+                        description = "The list of Object Identifiers (OIDs) separated by commas.\n" +
+                                "e.g., '1.3.6.1.2.1.1.1.0, 1.3.6.1.2.1.1.6.0'\n OIDs are objects to be identified " +
+                                "from the received message. The same objects need to be included in the source " +
+                                "mapping as attribute values for Siddhi to identify what attributes they represent.",
                         type = DataType.STRING),
                 @Parameter(name = SNMPConstants.REQUEST_INTERVAL,
-                        description = "Request interval between two requests.",
+                        description = "The time interval between two requests. Once you send a request and then " +
+                                "send another before the request interval has elapsed, the second request is not" +
+                                " delivered.",
                         optional = true,
                         type = DataType.INT,
                         defaultValue = SNMPConstants.DEFAULT_REQUEST_INTERVAL),
                 @Parameter(name = SNMPConstants.COMMUNITY,
                         optional = true,
-                        description = "Community string of the target SNMP agent. Default value is 'public'." +
-                                " This property only uses SNMP V1, V2C and do not need to provide while using V3",
+                        description = "The community string of the target SNMP agent. The default value is 'public'." +
+                                " This property is required only when the V1 and V2C SNMP versions are used. It is" +
+                                " not applicable when you use the V3 version.",
                         defaultValue = SNMPConstants.DEFAULT_COMMUNITY,
                         type = DataType.STRING),
                 @Parameter(name = SNMPConstants.AGENT_PORT,
-                        description = "Port number of the target SNMP agent.",
+                        description = "The port number of the target SNMP agent.",
                         optional = true,
                         type = DataType.INT,
                         defaultValue = SNMPConstants.DEFAULT_AGENT_PORT),
                 @Parameter(name = SNMPConstants.TRANSPORT_PROTOCOL,
-                        description = "Transport protocol. Acceptance parameters TCP, UDP",
+                        description = "The transport protocol used by the source to communicate. Supported " +
+                                "transport protocols are 'TCP' and 'UDP'.",
                         optional = true,
                         type = DataType.STRING,
                         defaultValue = SNMPConstants.DEFAULT_TRANSPORT_PROTOCOL),
                 @Parameter(name = SNMPConstants.TIMEOUT,
-                        description = "Waiting time for response of a request in milliseconds.",
+                        description = "The number of milliseconds for which the system must wait for a response " +
+                                "after a request is sent. If the time interval specified here elapses before a " +
+                                "response is received, the system retries sending the request. If no response is " +
+                                "received even after the number of retries reaches the maximum number specified via" +
+                                " the 'SNMPConstantsRETRIES' parameter, this can be due to the transport agent not" +
+                                " being available or due to the occurence of a timeout error. An error is logged to" +
+                                " inform you of the reason.",
                         optional = true,
                         type = DataType.INT,
                         defaultValue = SNMPConstants.DEFAULT_TIMEOUT),
                 @Parameter(name = SNMPConstants.RETRIES,
-                        description = "Number of retries of when a request fails.",
+                        description = "The maximum number of retries that must be attempted by the system if a " +
+                                "request does not receive a response within the time interval specifed via the " +
+                                "'SNMPConstants.TIMEOUT' parameter.",
                         optional = true,
                         type = DataType.INT,
                         defaultValue = SNMPConstants.DEFAULT_RETRIES),
                 // this parameters for v3
                 @Parameter(name = SNMPConstants.USER_NAME,
-                        description = "User Name of the user that configured on target agent. " +
-                                "This property only uses for SNMP version 3 and do not need to provide this " +
-                                "when using other versions(v2c, v1).",
+                        description = "The user name of the user that is configured on the transport agent. " +
+                                "This property is required only when using SNMP version 3. It is not applicable when" +
+                                " using the v2c or v1 version.",
                         optional = true,
                         type = DataType.STRING,
                         defaultValue = SNMPConstants.DEFAULT_USERNAME),
                 @Parameter(name = SNMPConstants.SECURITY_LVL,
-                        description = "Security level. Acceptance parameters AUTH_PRIV, AUTH_NO_PRIVE, " +
-                                "NO_AUTH_NO_PRIVE.This property only uses for SNMP version 3 and do not need to " +
-                                "provide this when using other versions(v2c, v1).",
+                        description = "The SNMP security level. Possible values are 'AUTH_PRIV', 'AUTH_NO_PRIVE', " +
+                        "and 'NO_AUTH_NO_PRIVE'. For more information about these security levels, see " +
+                        "[SNMP Security Model and Levels]" +
+                        "(https://www.ccexpert.us/wide-area-networks-2/snmp-security-models-and-levels.html)." +
+                        " This property is required only for SNMP version 3. It is not applicable when using" +
+                        " the v2c or v1 version.",
                         optional = true,
                         type = DataType.INT,
                         defaultValue = SNMPConstants.DEFAULT_SECURITY_LVL),
                 @Parameter(name = SNMPConstants.PRIV_PROTOCOL,
-                        description = "Privacy protocol of the target SNMP agent. Acceptance parameters NO_PRIV," +
-                                " PRIVDES, PRIVDES128, PRIVAES192, PRIVAES256, PRIV3DES. This property only uses for" +
-                                " SNMP version 3 and do not need to provide this when using other versions(v2c, v1).",
+                        description = "The privacy protocol of the target SNMP agent. Possible values are 'NO_PRIV'," +
+                                " 'PRIVDES', 'PRIVDES128', 'PRIVAES192', 'PRIVAES256', and 'PRIV3DES'. This " +
+                                "property is only required for SNMP version 3. It is not applicable when using " +
+                                "the v2c or v1 version.",
                         optional = true,
                         type = DataType.STRING,
                         defaultValue = SNMPConstants.DEFAULT_PRIV_PROTOCOL),
 
                 @Parameter(name = SNMPConstants.PRIV_PASSWORD,
-                        description = "Privacy protocol passphrase of the target SNMP agent." +
-                                " Passphrase should have more than 8 characters. This property only uses for " +
-                                "SNMP version 3 and do not need to provide this when using other versions(v2c, v1).",
+                        description = "The privacy protocol passphrase of the target SNMP agent. The passphrase " +
+                                "must have more than eight characters. This property is required only for SNMP " +
+                                "version 3. It is not applicable when using the v2c or v1 version.",
                         optional = true,
                         type = DataType.STRING,
                         defaultValue = SNMPConstants.DEFAULT_PRIV_PASSWORD),
 
                 @Parameter(name = SNMPConstants.AUTH_PROTOCOL,
-                        description = "Authentication protocol of the target SNMP agent. Can use NO_AUTH, AUTHMD5," +
-                                " AUTHSHA, AUTHHMAC192SHA256, AUTHHMAC192SHA512. This property only uses for SNMP" +
-                                " version 3 and do not need to provide this when using other versions(v2c, v1).",
+                        description = "The authentication protocol of the target SNMP agent. Possible values are" +
+                                " 'NO_AUTH', 'AUTHMD5', 'AUTHSHA', 'AUTHHMAC192SHA256', and 'AUTHHMAC192SHA512'. " +
+                                "This property is required only for SNMP version 3. It is not applicable when using" +
+                                " the v2c or v1 version.",
                         optional = true,
                         type = DataType.STRING,
                         defaultValue = SNMPConstants.DEFAULT_AUTH_PROTOCOL),
 
                 @Parameter(name = SNMPConstants.AUTH_PASSWORD,
-                        description = "Authentication protocol passphrase of the target SNMP agent." +
-                                "Passphrase should have more than 8 characters. This property only uses for " +
-                                "SNMP version 3 and do not need to provide this when using other versions(v2c, v1).",
+                        description = "The authentication protocol passphrase of the target SNMP agent. The" +
+                                "passphrase must have more than eight characters. This property is required only " +
+                                "for SNMP version 3. It is not applicable when using the v2c or v1 version.",
                         optional = true,
                         type = DataType.STRING,
                         defaultValue = SNMPConstants.DEFAULT_AUT_PASSWORD),
 
                 @Parameter(name = SNMPConstants.LOCAL_ENGINE_ID,
-                        description = "Local engine ID of the target SNMP agent. Default value is " +
-                                "device-generated ID, based on the local IP address and additional four " +
-                                "random bytes. This property only uses for SNMP version 3 and do not need to " +
-                                "provide this when using other versions(v2c, v1).",
+                        description = "The local engine ID of the target SNMP agent. The default value is the" +
+                                "device-generated ID based on the local IP address and four additional random bytes." +
+                                " This property is required only for SNMP version 3. It is not applicable when using" +
+                                " the v2c or v1 version.",
                         optional = true,
                         type = DataType.STRING,
                         defaultValue = SNMPConstants.DEFAULT_LOCAL_ENGINE_ID),
                 @Parameter(name = SNMPConstants.ENGINE_BOOT,
-                        description = "Engine boot of the snmp engine of the target SNMP agent. " +
-                                "Default value is 0. This property only uses for SNMP version 3 and do " +
-                                "not need to provide this when using other versions(v2c, v1).",
+                        description = "The engine boot of the SNMP engine of the target SNMP agent. The default " +
+                                "value is '0'. This property is required only for SNMP version 3. It is not " +
+                                "applicable when using the v2c or v1 version.",
                         optional = true,
                         type = DataType.INT,
                         defaultValue = SNMPConstants.DEFAULT_ENGINE_BOOT)
         },
         examples = {
                 @Example(
-                        description = "This example shows how to make get request for snmp version 1. " +
-                                "It uses keyvalue mapping and chooses transport protocol as UDP default." +
-                                "After staring the siddhi app it can get information of target  periodically, " +
-                                "here agent sysLocation and sysUpTime (related to oid) ",
-
                         syntax = "@source(type='snmp', \n" +
                                 "@map(type='keyvalue', " +
                                 "   @attributes(" +
-                                        "'value1' = '1.3.6.1.2.1.1.3.0', " +
+                                        "'sysUpTime' = '1.3.6.1.2.1.1.3.0', " +
                                         "'sysLocation' = '1.3.6.1.2.1.1.6.0') " +
                                         "),\n" +
                                 "host ='127.0.0.1',\n" +
@@ -177,11 +191,16 @@ import java.util.concurrent.TimeUnit;
                                 "request.interval = '60000',\n" +
                                 "oids='1.3.6.1.2.1.1.3.0, 1.3.6.1.2.1.1.6.0',\n" +
                                 "community = 'public') \n" +
-                                " define stream inputStream(sysUpTime string, sysLocation string);\n"
+                                " define stream inputStream(sysUpTime string, sysLocation string);\n",
+                        description = "This query shows how to make a get request for SNMP version 1. " +
+                                "It uses key-value mapping. The transport protocol is UDP by default." +
+                                "Once the Siddhi application is started, it can get information of the target " +
+                                "periodically. The @map annotation specifies that '1.3.6.1.2.1.1.3.0' is the system" +
+                                " up time, and '1.3.6.1.2.1.1.6.0' is the system location. The same values are " +
+                                "defined as OIDs. Therefore, when a message is received with those values, the " +
+                                "system returns the system up time and the system location derived from those values."
                 ),
                 @Example(
-                        description = "This example shows how to make get request for snmp version 2c ",
-
                         syntax = "@source(type='snmp', \n" +
                                 "@map(type='keyvalue', " +
                                 "   @attributes(" +
@@ -194,12 +213,10 @@ import java.util.concurrent.TimeUnit;
                                 "request.interval = '60000',\n" +
                                 "oids='1.3.6.1.2.1.1.3.0, 1.3.6.1.2.1.1.6.0',\n" +
                                 "community = 'public') \n" +
-                                " define stream inputStream(sysUpTime string, sysLocation string);\n"
+                                " define stream inputStream(sysUpTime string, sysLocation string);\n",
+                        description = "This example shows how to make get request for SNMP version 2c."
                 ),
                 @Example(
-                        description = "This example shows how to make get request for snmp version 3 " +
-                                "And here we can configure security protocols related to target agent as well.",
-
                         syntax = "@source(type ='snmp', \n" +
                                 "@map(type='keyvalue', " +
                                 "   @attributes(" +
@@ -217,7 +234,10 @@ import java.util.concurrent.TimeUnit;
                                 "priv.password = 'privpass',\n" +
                                 "auth.password = 'authpass',\n" +
                                 "user.name = 'agent5') \n" +
-                                "define stream inputStream(sysUpTime string, sysDescr string);\n"
+                                "define stream inputStream(sysUpTime string, sysDescr string);\n",
+                        description = "This example shows how to make get request for SNMP version 3. Note that " +
+                                "because this example uses version 3, you can also configure security protocols " +
+                                "related to the target agent."
                 ),
         }
 )
