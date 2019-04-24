@@ -17,6 +17,20 @@
  */
 package org.wso2.extension.siddhi.io.snmp.sink;
 
+import io.siddhi.annotation.Example;
+import io.siddhi.annotation.Extension;
+import io.siddhi.annotation.Parameter;
+import io.siddhi.annotation.util.DataType;
+import io.siddhi.core.config.SiddhiAppContext;
+import io.siddhi.core.exception.ConnectionUnavailableException;
+import io.siddhi.core.stream.ServiceDeploymentInfo;
+import io.siddhi.core.stream.output.sink.Sink;
+import io.siddhi.core.util.config.ConfigReader;
+import io.siddhi.core.util.snapshot.state.State;
+import io.siddhi.core.util.snapshot.state.StateFactory;
+import io.siddhi.core.util.transport.DynamicOptions;
+import io.siddhi.core.util.transport.OptionHolder;
+import io.siddhi.query.api.definition.StreamDefinition;
 import org.apache.log4j.Logger;
 import org.wso2.extension.siddhi.io.snmp.sink.exceptions.SNMPSinkRuntimeException;
 import org.wso2.extension.siddhi.io.snmp.util.SNMPConstants;
@@ -24,17 +38,6 @@ import org.wso2.extension.siddhi.io.snmp.util.SNMPManager;
 import org.wso2.extension.siddhi.io.snmp.util.SNMPManagerConfig;
 import org.wso2.extension.siddhi.io.snmp.util.SNMPValidator;
 import org.wso2.extension.siddhi.io.snmp.util.exceptions.SNMPRuntimeException;
-import org.wso2.siddhi.annotation.Example;
-import org.wso2.siddhi.annotation.Extension;
-import org.wso2.siddhi.annotation.Parameter;
-import org.wso2.siddhi.annotation.util.DataType;
-import org.wso2.siddhi.core.config.SiddhiAppContext;
-import org.wso2.siddhi.core.exception.ConnectionUnavailableException;
-import org.wso2.siddhi.core.stream.output.sink.Sink;
-import org.wso2.siddhi.core.util.config.ConfigReader;
-import org.wso2.siddhi.core.util.transport.DynamicOptions;
-import org.wso2.siddhi.core.util.transport.OptionHolder;
-import org.wso2.siddhi.query.api.definition.StreamDefinition;
 
 import java.io.IOException;
 import java.util.Map;
@@ -228,23 +231,29 @@ public class SNMPSink extends Sink {
     }
 
     @Override
+    protected ServiceDeploymentInfo exposeServiceDeploymentInfo() {
+        return null;
+    }
+
+    @Override
     public String[] getSupportedDynamicOptions() {
         return new String[0];
     }
 
     @Override
-    protected void init(StreamDefinition streamDefinition, OptionHolder optionHolder, ConfigReader configReader,
-                        SiddhiAppContext siddhiAppContext) {
+    protected StateFactory init(StreamDefinition streamDefinition, OptionHolder optionHolder, ConfigReader configReader,
+                                SiddhiAppContext siddhiAppContext) {
         this.siddhiAppContext = siddhiAppContext;
         this.streamDefinition = streamDefinition;
         managerConfig = SNMPValidator.validateAndGetManagerConfig(optionHolder,
                 this.streamDefinition.getId(), false);
         manager = new SNMPManager(managerConfig);
+        return null;
     }
 
 
     @Override
-    public void publish(Object payload, DynamicOptions dynamicOptions) {
+    public void publish(Object payload, DynamicOptions dynamicOptions, State state) {
         Map<String, String> data = (Map) payload;
         try {
             manager.setRequestAndValidate(data);
@@ -278,15 +287,6 @@ public class SNMPSink extends Sink {
 
     @Override
     public void destroy() {
-    }
-
-    @Override
-    public Map<String, Object> currentState() {
-        return null;
-    }
-
-    @Override
-    public void restoreState(Map<String, Object> map) {
     }
 }
 

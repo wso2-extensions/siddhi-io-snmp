@@ -17,6 +17,11 @@
  */
 package org.wso2.extension.siddhi.io.snmp.sink;
 
+import io.siddhi.core.SiddhiAppRuntime;
+import io.siddhi.core.SiddhiManager;
+import io.siddhi.core.event.Event;
+import io.siddhi.core.stream.input.InputHandler;
+import io.siddhi.core.stream.output.StreamCallback;
 import org.apache.log4j.Logger;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
@@ -26,11 +31,6 @@ import org.testng.annotations.Test;
 import org.wso2.extension.siddhi.io.snmp.utils.AdvancedCommandProcessor;
 import org.wso2.extension.siddhi.io.snmp.utils.Agent;
 import org.wso2.extension.siddhi.io.snmp.utils.EventHolder;
-import org.wso2.siddhi.core.SiddhiAppRuntime;
-import org.wso2.siddhi.core.SiddhiManager;
-import org.wso2.siddhi.core.event.Event;
-import org.wso2.siddhi.core.stream.input.InputHandler;
-import org.wso2.siddhi.core.stream.output.StreamCallback;
 
 import java.io.IOException;
 

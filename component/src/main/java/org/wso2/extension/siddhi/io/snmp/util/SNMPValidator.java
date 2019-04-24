@@ -17,6 +17,8 @@
  */
 package org.wso2.extension.siddhi.io.snmp.util;
 
+import io.siddhi.core.util.transport.OptionHolder;
+import io.siddhi.query.api.exception.SiddhiAppValidationException;
 import org.apache.log4j.Logger;
 import org.snmp4j.security.AuthHMAC192SHA256;
 import org.snmp4j.security.AuthMD5;
@@ -30,8 +32,6 @@ import org.snmp4j.security.SecurityLevel;
 import org.snmp4j.smi.OID;
 import org.snmp4j.smi.OctetString;
 import org.snmp4j.smi.VariableBinding;
-import org.wso2.siddhi.core.util.transport.OptionHolder;
-import org.wso2.siddhi.query.api.exception.SiddhiAppValidationException;
 
 import java.util.LinkedList;
 import java.util.List;
