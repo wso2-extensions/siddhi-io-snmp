@@ -22,7 +22,8 @@ import io.siddhi.core.SiddhiManager;
 import io.siddhi.core.event.Event;
 import io.siddhi.core.stream.input.InputHandler;
 import io.siddhi.core.stream.output.StreamCallback;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -40,7 +41,7 @@ import java.io.IOException;
  */
 public class TestCaseOfSNMPSinkV3 {
 
-    private static final Logger log = Logger.getLogger(TestCaseOfSNMPSinkV3.class);
+    private static final Logger log = LogManager.getLogger(TestCaseOfSNMPSinkV3.class);
     private String port = "2020";
     private String ip = "127.0.0.1";
     private Agent agent;

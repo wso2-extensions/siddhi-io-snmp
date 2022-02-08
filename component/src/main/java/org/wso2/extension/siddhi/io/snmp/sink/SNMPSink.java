@@ -31,7 +31,6 @@ import io.siddhi.core.util.snapshot.state.StateFactory;
 import io.siddhi.core.util.transport.DynamicOptions;
 import io.siddhi.core.util.transport.OptionHolder;
 import io.siddhi.query.api.definition.StreamDefinition;
-import org.apache.log4j.Logger;
 import org.wso2.extension.siddhi.io.snmp.sink.exceptions.SNMPSinkRuntimeException;
 import org.wso2.extension.siddhi.io.snmp.util.SNMPConstants;
 import org.wso2.extension.siddhi.io.snmp.util.SNMPManager;
@@ -219,7 +218,6 @@ import java.util.Map;
 
 public class SNMPSink extends Sink {
 
-    private static final Logger LOG = Logger.getLogger(SNMPSink.class);
     private SNMPManagerConfig managerConfig;
     private SNMPManager manager;
     private StreamDefinition streamDefinition;

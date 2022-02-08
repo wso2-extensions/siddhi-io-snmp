@@ -19,7 +19,6 @@ package org.wso2.extension.siddhi.io.snmp.util;
 
 import io.siddhi.core.util.transport.OptionHolder;
 import io.siddhi.query.api.exception.SiddhiAppValidationException;
-import org.apache.log4j.Logger;
 import org.snmp4j.security.AuthHMAC192SHA256;
 import org.snmp4j.security.AuthMD5;
 import org.snmp4j.security.AuthSHA;
@@ -49,7 +48,6 @@ public class SNMPValidator {
         this.streamName = streamName;
     }
 
-    private final Logger log = Logger.getLogger(SNMPValidator.class);
 
     private int validateVersion(String versionString) {
         versionString = versionString.toLowerCase(Locale.ENGLISH);

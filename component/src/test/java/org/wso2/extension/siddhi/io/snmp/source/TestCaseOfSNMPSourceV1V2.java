@@ -23,7 +23,8 @@ import io.siddhi.core.event.Event;
 import io.siddhi.core.stream.output.StreamCallback;
 import io.siddhi.core.util.EventPrinter;
 import io.siddhi.core.util.SiddhiTestHelper;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -43,7 +44,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 public class TestCaseOfSNMPSourceV1V2 {
 
-    private  Logger log = Logger.getLogger(TestCaseOfSNMPSourceV1V2.class);
+    private static final Logger log = LogManager.getLogger(TestCaseOfSNMPSourceV1V2.class);
     private AtomicInteger eventCount = new AtomicInteger(0);
     private AtomicBoolean eventArrived = new AtomicBoolean(false);
     private String port = "2021";

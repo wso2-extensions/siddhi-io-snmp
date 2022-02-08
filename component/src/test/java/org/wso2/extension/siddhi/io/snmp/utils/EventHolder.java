@@ -17,7 +17,8 @@
  */
 package org.wso2.extension.siddhi.io.snmp.utils;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.LinkedList;
 import java.util.Map;
@@ -28,7 +29,7 @@ import java.util.Map;
  *
  * */
 public class EventHolder {
-    private Logger log = Logger.getLogger(EventHolder.class);
+    private static final Logger log = LogManager.getLogger(EventHolder.class);
     private volatile LinkedList<Map<String, String>> eventList;
     private int listSize = 10;
 
