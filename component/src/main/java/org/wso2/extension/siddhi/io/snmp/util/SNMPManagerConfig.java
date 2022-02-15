@@ -17,7 +17,6 @@
  */
 package org.wso2.extension.siddhi.io.snmp.util;
 
-import org.apache.log4j.Logger;
 import org.snmp4j.CommunityTarget;
 import org.snmp4j.PDU;
 import org.snmp4j.ScopedPDU;
@@ -37,7 +36,6 @@ import java.util.List;
  */
 public class SNMPManagerConfig {
 
-    private static final Logger LOG = Logger.getLogger(SNMPManagerConfig.class);
 
     // version 2 & 1 properties
     private boolean isTCP = false;

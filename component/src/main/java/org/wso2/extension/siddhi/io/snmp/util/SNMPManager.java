@@ -17,7 +17,6 @@
  */
 package org.wso2.extension.siddhi.io.snmp.util;
 
-import org.apache.log4j.Logger;
 import org.snmp4j.Snmp;
 import org.snmp4j.TransportMapping;
 import org.snmp4j.event.ResponseEvent;
@@ -43,7 +42,6 @@ import java.util.Map;
  */
 public class SNMPManager {
 
-    private Logger log = Logger.getLogger(SNMPManager.class);
     private Snmp snmp;
     private SNMPManagerConfig managerConfig;
 

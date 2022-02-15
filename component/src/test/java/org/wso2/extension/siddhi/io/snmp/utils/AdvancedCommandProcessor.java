@@ -18,7 +18,8 @@
 
 package org.wso2.extension.siddhi.io.snmp.utils;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.snmp4j.CommandResponderEvent;
 import org.snmp4j.MessageDispatcher;
 import org.snmp4j.MessageException;
@@ -44,7 +45,7 @@ import java.util.Map;
  * */
 public class AdvancedCommandProcessor extends CommandProcessor {
 
-    private Logger log = Logger.getLogger(AdvancedCommandProcessor.class);
+    private static final Logger log = LogManager.getLogger(AdvancedCommandProcessor.class);
     private EventHolder eventHolder;
 
 

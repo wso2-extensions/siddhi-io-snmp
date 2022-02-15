@@ -32,7 +32,6 @@ import io.siddhi.core.util.snapshot.state.StateFactory;
 import io.siddhi.core.util.transport.OptionHolder;
 import io.siddhi.query.api.definition.StreamDefinition;
 import io.siddhi.query.api.exception.SiddhiAppValidationException;
-import org.apache.log4j.Logger;
 import org.wso2.extension.siddhi.io.snmp.util.SNMPConstants;
 import org.wso2.extension.siddhi.io.snmp.util.SNMPManager;
 import org.wso2.extension.siddhi.io.snmp.util.SNMPManagerConfig;
@@ -244,14 +243,13 @@ import java.util.concurrent.TimeUnit;
 
 public class SNMPSource extends Source {
 
-    private static final Logger LOG = Logger.getLogger(SNMPSource.class);
     private int requestInterval;
     private SNMPManager manager;
     private SourceEventListener sourceEventListener;
     private StreamDefinition streamDefinition;
     private ScheduledFuture future;
     private ScheduledExecutorService scheduledExecutorService;
-    private SNMPListener listener;
+    private SNMPListener listener = null;
     private SiddhiAppContext siddhiAppContext;
 
     @Override

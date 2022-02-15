@@ -18,7 +18,8 @@
 package org.wso2.extension.siddhi.io.snmp.source;
 
 import io.siddhi.core.stream.input.source.SourceEventListener;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.wso2.extension.siddhi.io.snmp.util.SNMPManager;
 import org.wso2.extension.siddhi.io.snmp.util.exceptions.AgentNotFoundException;
 
@@ -35,7 +36,7 @@ public class SNMPListener implements Runnable {
     private boolean paused = false;
     private ReentrantLock lock = new ReentrantLock();
     private Condition condition = lock.newCondition();
-    private Logger log = Logger.getLogger(SNMPListener.class);
+    private static final Logger log = LogManager.getLogger(SNMPListener.class);
     private SNMPManager manager;
     private SourceEventListener sourceEventListener;
 

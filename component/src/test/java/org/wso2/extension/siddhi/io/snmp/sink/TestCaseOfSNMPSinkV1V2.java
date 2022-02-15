@@ -22,7 +22,8 @@ import io.siddhi.core.SiddhiManager;
 import io.siddhi.core.event.Event;
 import io.siddhi.core.stream.input.InputHandler;
 import io.siddhi.core.stream.output.StreamCallback;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -45,7 +46,7 @@ public class TestCaseOfSNMPSinkV1V2 {
     Agent agent;
     AdvancedCommandProcessor processor;
     EventHolder eventHolder;
-    private Logger log = Logger.getLogger(TestCaseOfSNMPSinkV1V2.class);
+    private static final Logger log = LogManager.getLogger(TestCaseOfSNMPSinkV1V2.class);
 
     @BeforeClass
     public void startAgent() throws IOException {
@@ -158,7 +159,6 @@ public class TestCaseOfSNMPSinkV1V2 {
         log.info("-------------------------------------------------------------------------------------");
         log.info("                      SNMP Version 1 TCP Sink Test Case                              ");
         log.info("-------------------------------------------------------------------------------------");
-        log = Logger.getLogger(SNMPSink.class);
         SiddhiManager siddhiManager = new SiddhiManager();
         String siddhiApp = "@App:name('snmpSink') \n" +
                 "\n" +
